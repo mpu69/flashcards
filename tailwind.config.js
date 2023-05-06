@@ -9,14 +9,18 @@ module.exports = {
     extend: {
       colors: {
         "bg-primary": "#0F151A",
-        "bg-secondary": "#104621",
-        "bg-secondary-hover": "#0b2f16",
+        "bg-primary-fade": "#0F151A",
+        "bg-secondary": "#FF7F50",
+        "bg-third": "#2f2e41",
         "text-primary": "#f2f2f2",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      animation: {
+        "ping-once": "ping 2s forwards",
       },
     },
   },
