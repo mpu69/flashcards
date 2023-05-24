@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "./../../firebase";
 import { useRouter } from "next/router";
-import Header from "./header";
+import Header from "../header";
 import Button from "./../button";
 
 interface RegisterProps {
@@ -61,7 +61,7 @@ export default function Register({ setRegister }: RegisterProps) {
       ></div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="absolute h-1/2 w-96 bg-bg-secondary rounded-lg flex flex-col justify-center items-center gap-4"
+        className="absolute h-1/2 w-96 bg-Background rounded-lg flex flex-col justify-center items-center gap-4 shadow-md shadow-Secondary-Button"
       >
         <img
           onClick={() => {

@@ -8,7 +8,7 @@ const Button = ({ text, onClick }: ButtonProps) => {
     <button
       onClick={onClick}
       type="submit"
-      className="text-bg-primary bg-text-primary w-40 h-14 rounded-md hover:bg-bg-primary hover:text-text-primary hover:border-2 border-text-primary active:scale-95 duration-300"
+      className="text-Text bg-Primary-Button w-40 h-14 rounded-md hover:-translate-y-1 hover:scale-105 duration-500"
     >
       {text}
     </button>

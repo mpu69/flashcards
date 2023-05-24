@@ -8,7 +8,7 @@ export default function Index() {
   const [login, setLogin] = useState(false);
 
   return (
-    <main className="h-screen bg-bg-primary flex flex-col justify-center items-center gap-12">
+    <main className="h-screen bg-Background flex flex-col justify-center items-center gap-12">
       <h1 className="absolute text-[#ffffff3b] text-9xl animate-ping-once">
         Welcome
       </h1>

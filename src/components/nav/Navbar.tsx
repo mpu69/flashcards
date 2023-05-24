@@ -1,36 +1,10 @@
-"use client";
-
 import { useState } from "react";
-import { auth } from "./../../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import getUser from "./../../user";
 import ProfilePicture from "./profile-image";
 import ProfileDropdown from "./profile-dropdown";
 
-interface UserState {
-  displayName: string | null;
-  email: string | null;
-}
-
 export default function Navbar() {
-  const [user, setUser] = useState<UserState>({
-    displayName: null,
-    email: null,
-  });
-
-  onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) {
-      setUser({
-        displayName: currentUser.displayName,
-        email: currentUser.email,
-      });
-    } else {
-      setUser({
-        displayName: null,
-        email: null,
-      });
-    }
-  });
-
+  let user = getUser();
   const [profileDropdownState, setProfileDropdownState] = useState(false);
 
   return (
