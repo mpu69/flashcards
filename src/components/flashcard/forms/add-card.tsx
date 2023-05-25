@@ -1,10 +1,17 @@
 import { useForm } from "react-hook-form";
+import { db } from "@/firebase";
+import { doc, setDoc } from "firebase/firestore";
 import getUser from "@/user";
 import Header from "@/components/header";
 import Button from "@/components/button";
 
 interface Props {
   setAddCard: (value: boolean) => void;
+}
+
+interface Data {
+  front: string;
+  back: string;
 }
 
 export default function AddCard({ setAddCard }: Props) {
@@ -21,7 +28,12 @@ export default function AddCard({ setAddCard }: Props) {
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: Data) => {
+    await setDoc(doc(db, "decks"), {
+      front: data.front,
+      back: data.back,
+    });
+  };
   return (
     <>
       <div

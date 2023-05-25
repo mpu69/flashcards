@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./../../../firebase";
@@ -7,13 +8,14 @@ import getUser from "@/user";
 
 interface Props {
   setNewDeck: (value: boolean) => void;
+  setDeckName: (value: string) => void;
 }
 
 interface Data {
   deckName: string;
 }
 
-export default function NewCard({ setNewDeck }: Props) {
+export default function NewCard({ setNewDeck, setDeckName }: Props) {
   const user = getUser();
   const {
     register,
@@ -30,6 +32,8 @@ export default function NewCard({ setNewDeck }: Props) {
       deckName: data.deckName,
       user: user.displayName,
     });
+    setNewDeck(false);
+    setDeckName(data.deckName);
   };
   return (
     <>

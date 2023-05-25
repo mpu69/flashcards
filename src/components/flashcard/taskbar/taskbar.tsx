@@ -1,13 +1,13 @@
 import Button from "./taskbar-button";
 
 interface Props {
-  setAddCard?: () => void;
+  onClick?: () => void;
 }
 
-export default function Taskbar({ setAddCard }: Props) {
+export default function Taskbar({ onClick }: Props) {
   return (
     <div className="flex text-Text gap-2 h-12">
-      <Button text="Add" onClick={setAddCard} />
+      <Button text="Add" onClick={onClick} />
       <Button text="Add2" />
       <Button text="Add2" />
       <Button text="Add2" />
