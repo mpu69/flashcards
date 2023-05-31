@@ -1,22 +1,21 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { db } from "@/firebase";
-import { doc, setDoc } from "firebase/firestore";
-import getUser from "@/user";
+import { collection, addDoc } from "firebase/firestore";
 import Header from "@/components/header";
 import Button from "@/components/button";
 
 interface Props {
   setAddCard: (value: boolean) => void;
+  currentDeck: string;
+  setNoDeckSelected: (value: boolean) => void;
 }
 
-interface Data {
-  front: string;
-  back: string;
-}
-
-export default function AddCard({ setAddCard }: Props) {
-  const user = getUser();
-
+export default function AddCard({
+  setAddCard,
+  currentDeck,
+  setNoDeckSelected,
+}: Props) {
   const {
     register,
     handleSubmit,
@@ -28,12 +27,19 @@ export default function AddCard({ setAddCard }: Props) {
     },
   });
 
+  interface Data {
+    front: string;
+    back: string;
+  }
+
   const onSubmit = async (data: Data) => {
-    await setDoc(doc(db, "decks"), {
+    await addDoc(collection(db, "cards"), {
       front: data.front,
       back: data.back,
+      deck: currentDeck,
     });
   };
+
   return (
     <>
       <div
@@ -59,7 +65,16 @@ export default function AddCard({ setAddCard }: Props) {
           {...register("back", { required: "*This is required" })}
           className="w-2/3 h-10 rounded-lg px-2"
         />
-        <Button text="Add" />
+        <Button
+          onClick={() => {
+            if (currentDeck === "") {
+              setNoDeckSelected(true);
+            } else {
+              setAddCard(false);
+            }
+          }}
+          text="Add"
+        />
       </form>
     </>
   );
