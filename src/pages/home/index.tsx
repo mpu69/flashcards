@@ -20,9 +20,10 @@ export default function Home() {
   const [noDeckSelected, setNoDeckSelected] = useState(false);
 
   //Decks
-  const [deckNames, setDeckNames] = useState([]);
   const [currentDeck, setCurrentDeck] = useState("");
 
+  //Array of decks
+  const [deckNames, setDeckNames] = useState([]);
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "decks"), (snapshot) => {
       const names: never[] = [];
@@ -30,6 +31,25 @@ export default function Home() {
         names.push(doc.data().deckName as never);
       });
       setDeckNames(names);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  //array of cards
+  const [cards, setCards] = useState([]);
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "cards"), (snapshot) => {
+      const cardData: never[] = [];
+      snapshot.forEach((doc) => {
+        const card = doc.data();
+        cardData.push({
+          front: card.front,
+          back: card.back,
+          deck: card.deck,
+        } as never);
+      });
+      setCards(cardData);
     });
 
     return () => unsubscribe();
@@ -78,7 +98,7 @@ export default function Home() {
               text="Open"
             />
           </div>
-          <Flashcards />
+          <Flashcards currentDeck={currentDeck} cards={cards} />
           <Taskbar
             onClick={() => {
               setAddCard(true);
